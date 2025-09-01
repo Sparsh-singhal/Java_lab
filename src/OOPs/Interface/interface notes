@@ -1,0 +1,81 @@
+An interface in Java is a blueprint of a class, containing only method signatures (no implementations) and constants.
+Interfaces are similar to abstract class but having all the methods of abstract type.
+
+
+Note :
+Till Java 7, interfaces can contain only abstract methods and constants.
+In Java 8, we can provide the implementation of methods using default methods and static methods.
+In Java 9, we can provide the implementation of methods using private methods.
+
+
+Use of Interfaces :-
+1.Used to achieve 100% abstraction in Java.
+2.Used to define a common behaviour across unrelated classes.
+3.Used to achieve multiple inheritance in Java.
+4.Used to achieve loose coupling in our code.
+5.Used extensively in frameworks, APIs, and design patterns (e.g., DAO, Service Layer).
+
+
+
+import java.util.Scanner;
+
+// Interface to achieve loose coupling
+interface Payment
+{
+    void pay();
+}
+
+// UPI Payment Implementation
+class UpiPayment implements Payment
+{
+    public void pay()
+    {
+        System.out.println("Payment done using UPI.");
+    }
+}
+
+// Net Banking Payment Implementation
+class NetBankingPayment implements Payment
+{
+    public void pay()
+    {
+        System.out.println("Payment done using Net Banking.");
+    }
+}
+
+// Checkout class using interface (not tightly bound to any one payment method)
+class PaymentCheckout
+{
+    void payment(Payment payment)
+    {
+        payment.pay();  // Loose coupling: works with any class that implements Payment
+    }
+}
+
+// Main class with switch-case
+public class MainApp
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        PaymentCheckout checkout = new PaymentCheckout();
+
+        System.out.println("Choose payment method:");
+        System.out.println("1. UPI");
+        System.out.println("2. Net Banking");
+        System.out.print("Enter choice: ");
+        int choice = scanner.nextInt();
+
+        switch (choice)
+        {
+            case 1:
+                checkout.payment(new UpiPayment());
+                break;
+            case 2:
+                checkout.payment(new NetBankingPayment());
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
+    }
+}

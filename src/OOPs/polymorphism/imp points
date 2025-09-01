@@ -1,0 +1,72 @@
+Rules of Method Overloading:
+1. All overloaded methods must have the same name.
+2. All the methods should be in same class.
+3. All the method parameters list must be different:
+     -Number of parameters
+     -Type of parameters
+     -Order of parameters
+
+In compile-time polymorphism, the Java compiler decides at compile time
+which overloaded method to invoke based on the
+method signature and reference type....!!
+
+Rules of Method Overriding:
+1.All overloaded methods must have the same name.
+2.All the methods should be in different class.
+3.Should follow IS-A Relationship (Inheritance)
+4.All the method parameters list must be same:
+     -Number of parameters
+     -Type of parameters
+     -Order of parameters
+In runtime polymorphism, the JVM (Java Virtual Machine) decides at runtime which
+overridden method to invoke based on the actual object (not the reference type).
+
+
+Questions Overloading :
+Q1. Can we overload main() method ?  Yes
+Q2.Can we overload constructors ? Yes
+Q3.Which operator is overloaded in Java ? + for addition and concatenation
+Q4.Can we achieve method overloading
+   by changing only the return type of method ?  No
+
+Questions Overriding :
+Q1.Can we override main() method ? No , its static . Static , final and Private can not be overloaded
+Q2.Can we override constructors ? No
+Q3.What are covariant return types in Method overriding ?
+Q4.What's the concepts of Access-Modifier in Method Overriding: *
+Q5.Which methods cannot override ?
+*: Access Modifier of sub class method can be same or higher than super class method.
+Super Class => Sub Class
+Private   => Private, Default, Protected, Public
+Default   =>Default, Protected, Public
+Protected =>Protected, Public
+Public    =>Public
+
+class A1 {
+    void m1() {
+        System.out.println("A");
+    }
+}
+class B1 extends A1 {
+    void m2() {
+        System.out.println("B");
+    }
+}
+public class Dpoly1 {
+    public static void main(String[] args) {
+        A1 a1 = new B1();
+        a1.m1();  // ✅ Works
+        a1.m2();  // ❌ Compile-time error
+    }
+}
+
+At compile time, Java only looks at the declared type (A1) to see
+what methods are available.
+Since A1 does not have a method m2(),
+the compiler throws an error — even though at runtime the object is actually B1.
+
+At runtime, JVM checks which version of m1() belongs to the actual object.
+
+Dynamic Method Dispatch (also called Runtime Polymorphism)
+It is the process by which a call to an overridden method is resolved at runtime, not at compile time.
+This allows Java to decide which version of a method to call (parent’s or child’s) based on the actual object type — even if the reference type is the parent

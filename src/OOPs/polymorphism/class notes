@@ -1,0 +1,125 @@
+Polymorphism
+• Concept of Polymorphism is very useful in Java programming.
+• In Polymorphic state codes can be easily managed.
+• In Polymorphic state one form behaves different in different situations.
+
+Types of Polymorphism: -
+
+1. Compile Time Polymorphism (Static Polymorphism)
+2. Runtime Polymorphism (Dynamic Polymorphism)
+
+Compile Time Polymorphism: -
+In Java we can achieve Compile Time or Static Polymorphism using the feature of Method Overloading.
+
+Method Overloading: -
+Method Overloading is a feature that can be used to assign a singular name to more than one method.
+
+Prerequisites for application of Method Overloading feature:
+a. Method name must be same for all methods.
+b. Method parameter must be different in all the methods.
+c. Method access modifier and Method return type can be any.
+
+Under Method Overloading the execution of any method depends on the match between list of arguments
+and list of parameters. When the list of parameters and list of arguments differ then we get an error at the time of compilation.
+That is the reason Method Overloading is under Compile Time Polymorphism category.
+
+Runtime Polymorphism
+In Java to achieve Runtime Polymorphism we have to use two different features in our program.
+
+1. Dynamic Dispatch
+2. Method Overriding
+
+If we omit anyone out of the two then we won’t be able to achieve Runtime Polymorphism or Dynamic Polymorphism.
+
+. Dynamic Dispatch
+It is a process to store sub class object reference into the super type reference variable.
+A a1 = new A();
+^    ^       ^
+|    |       |
+|    |       └── Creates a new object of class A
+|    └────────── Variable name
+└─────────────── Reference type (class A)
+                 It tells the compiler what kind of methods and fields can be used with the variable.
+                 It also defines what objects can be assigned to that variable.
+
+Let’s break it like a story of toy factory:
+
+🔧 A = The blueprint for building toy robots.
+🧺 new A() = You build a new toy robot using that blueprint.
+🏷️ a1 = You give that robot a name tag: "a1".
+So you're basically saying:
+“Hey, make a new robot using blueprint A, and I’ll call it a1 so I can use it later.”
+
+class A{
+    }
+class B extends A{
+    }
+class DDispatch{
+	public static void main(String arg[]){
+		A a1 = new A(); // It is okay
+		B b1 = new B(); // It is okay
+		A a2 = new B(); // It is okay
+		// B b2 = new A();  error :- Incompatible type
+		// B b3 = (B) new A(); exception :- java.lang.ClassCastException
+		// B b4 = a2;  error :- Incompatible type
+		B b5 = (B) a2; // It is okay
+		// B b6 = (B) a1; exception :- java.lang.ClassCastException
+	}
+}
+ Here we can see that we have class A and class B (which is the sub class of class A).
+
+A a2 = new B() : In this equation reference variable (A a2) is A type
+                 and object reference (new B()) is B type. B class is a sub class of A and as we know that dynamic dispatch allows us to store sub type object reference into the super type of reference variable, hence the equation is valid.
+🏗️ Background:
+You have two blueprints now:
+A = basic robot blueprint 🤖
+B = fancy robot blueprint that extends A (adds cool features like dancing 💃)
+“Make a fancy robot using blueprint B,
+but I’ll store it in a basic robot box labeled a2.”
+🔍 So what's happening exactly?
+🔧 new B() → You build a fancy robot.
+🧺 A a2 → You put it into a box meant for basic robots (because fancy robots are still robots).
+And Java says:
+“Okay, no problem! Since B is a kind of A, I can put a B object into an A-type box.”
+
+
+B b2 = new A() :  Compile-time error: Incompatible types
+                  You’re trying to store a superclass object (new A()) in a subclass reference (B).
+                  Not allowed, because A may not have the properties or methods of B.
+
+
+B b3 = (B) new A(): Runtime error: ClassCastException
+                    Even though you're casting, new A() is not really a B object.
+                    The compiler lets it compile, but at runtime it crashes.
+                    Important: You can only cast to a type if the actual object is already of that type.
+
+B b4 = a2: Compile-time error: Incompatible types
+          a2 is of type A (even though it holds a B object).
+          Without an explicit cast, the compiler says, "Nope! A can't go into B".
+
+
+B b5 = (B) a2: a2 actually holds a B object.
+               You're telling the compiler, “Trust me, I know it’s a B,” and you're right.
+               So this cast works safely.
+
+B b6 = (B) a1: Runtime error: ClassCastException
+               a1 = new A(); so the object is really just an A.
+               You're trying to cast it to a B, which it is not — so Java throws an error.
+
+
+
+2. Method-Overriding
+Method-Overriding feature is applied on a method in super class,
+so as to get its new implementation in the sub class.
+
+Rules for applying Method-Overriding: -
+
+a. Method name of sub class must be the same as method name of super class.
+b. Method return type of sub class method must be the same as return type of the super class method.
+c. List of parameters of sub class method must be same as the list of parameters of super class method.
+d. Access Modifier of sub class method can be same or higher than the access modifier of super class method.
+Super Class => Sub Class
+Private   => Private, Default, Protected, Public
+Default   =>Default, Protected, Public
+Protected =>Protected, Public
+Public    =>Public

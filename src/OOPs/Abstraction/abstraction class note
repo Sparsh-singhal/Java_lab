@@ -1,0 +1,44 @@
+No common functionality between classes	❌ Don't use abstract class at all
+You want to use common constructor logic.
+
+Abstract Class
+In Java an Abstract Class is a special type of class having certain important features that are very useful in Application development. Let us begin the discussion on abstract class with abstract method.
+
+• An Abstract Method is a method which does not contain a body.
+• When we declare a method without a body in Java program then we get an error at the time of compilation.
+
+class A{
+	void m1();
+} // error: missing method body, or declare abstract
+
+When we define a method without a body then we should declare that method using abstract keyword.
+When we declare an abstract method in a class then we should declare that class along with an abstract keyword,
+otherwise we will get an error at the time of compilation.
+
+abstract class JTC{
+	abstract void m1();
+}
+• An abstract class can contain different type of member like Instance / Static Variable, Instance /
+  Static Block, Instance / Static Method, Constructors etc. just like a concrete class.
+• We cannot create an object of an abstract class.
+
+abstract class A{
+	abstract void m1(); // A abstract method without a body (only declaration).
+	void m2(){
+		System.out.println("m2 in A class");
+	}
+}
+class B{
+	public static void main(String arg[]){
+		A a1 = new A();
+		a1.m2();
+	}
+}//error: A is abstract; cannot be instantiated
+
+When we use an abstract keyword to define a class, that class is incompletely defined.
+Also, an abstract class can contain an abstract method.
+Due to these reasons, there is no provision for creating objects of an abstract class.
+
+When a class extends an abstract class :
+: then we should override all the abstract methods of abstract class into its sub class,
+: or else we should declare that sub class as an abstract class.
