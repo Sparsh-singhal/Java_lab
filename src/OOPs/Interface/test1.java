@@ -28,6 +28,7 @@ public class test1 implements Inter2,Inter3 {
         System.out.println(Inter2.x);
         int x=113;
         System.out.println(x);
+
     }
 
     @Override

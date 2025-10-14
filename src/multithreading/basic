@@ -1,0 +1,22 @@
+multithreading:- each cpu can have multiple threads and processes are divided into these physical or virtual threads
+multiprogramming:- multiple tasks loaded into memory running one by one if any program wait for resource
+multitasking:- multiple program running processes so fast in tme slices it create illusion of parallelism
+multiprocessing:- multiple cores of cpu running tasks concurrently
+
+
+there are 2 ways to create threads in java:-
+1) thread class
+2) runnable Interface
+
+
+Life cycle of thread
+
+      start()         jvm->OS to schedule                task complete
+NEW-----------→Runable-----------------------→Running--------------------→Terminate
+                                                ↑
+                                                |
+                                                | sleep(),wait(),suspend,interupt
+                                                |
+                                                |
+                                                ↓
+                                            Inactive/non-runable
